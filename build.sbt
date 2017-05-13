@@ -20,7 +20,7 @@ scriptedLaunchOpts ++= {
     .getRuntimeMXBean()
     .getInputArguments()
     .asScala
-    .filter(a => Seq("-Xmx", "-Xms").contains(a) || a.startsWith("-XX"))
+    .filter(a => Seq("scala.ext.dirs", "-Xmx", "-Xms").exists(a.contains) || a.startsWith("-XX"))
     .toSeq
   memOpt ++ Seq(s"-Dplugin.version=${version.value}")
 }
